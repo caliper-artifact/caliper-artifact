@@ -1,0 +1,376 @@
+
+
+use anyhow::{anyhow, Context, Result};
+use chrono::Local;
+use clap::Parser;
+use indicatif::{ProgressBar, ProgressStyle};
+use reqwest::header::HeaderMap;
+use serde::Deserialize;
+use serde_json::{json, Map as JsonMap, Value};
+use std::{
+    collections::{HashMap, HashSet},
+    fs,
+    io::{BufWriter, Write},
+    path::{Path, PathBuf},
+    time::Duration,
+};
+use tokio::time::sleep;
+
+use governor::{Quota, RateLimiter};
+use std::time::Duration as StdDuration;
+use std::num::NonZeroU32;
+
+struct ModelLimits {
+    input: usize,
+    _output: usize,
+}
+
+fn get_model_limits(model_name: &str) -> ModelLimits {
+    match model_name {
+        "gemini-2.5-flash-preview-05-20" => ModelLimits { input: 1_048_576, _output: 65_536 },
+        "gemini-2.5-flash-lite-preview-06-17" => ModelLimits { input: 1_000_000, _output: 64_000 },
+        "gemini-2.5-flash" => ModelLimits { input: 1_048_576, _output: 65_536 },
+        "gemini-2.5-pro" => ModelLimits { input: 1_048_576, _output: 65_536 },
+        "gemini-2.0-flash" => ModelLimits { input: 1_048_576, _output: 8_192 },
+        _ => ModelLimits { input: 1_000_000, _output: 8_192 },
+    }
+}
+
+struct Logger {
+    writer: BufWriter<fs::File>,
+}
+impl Logger {
+    fn new<P: AsRef<Path>>(p: P) -> Result<Self> {
+        let file = fs::OpenOptions::new().create(true).append(true).write(true).open(p)?;
+        Ok(Self { writer: BufWriter::new(file) })
+    }
+    fn log(&mut self, msg: &str) {
+        let ts = Local::now().format("%Y-%m-%d %H:%M:%S");
+        let _ = writeln!(self.writer, "[{ts}] {msg}");
+        let _ = self.writer.flush();
+    }
+}
+
+#[derive(Debug, Deserialize, Clone)]
+struct Record {
+    prompt_count: u32,
+    #[serde(alias = "instruction_original", alias = "instruction")]
+    instruction_original: String,
+    #[serde(flatten)]
+    extra: JsonMap<String, Value>,
+}
+
+#[derive(Parser, Debug)]
+#[command(version, author, about = "Assess semantic fidelity of paraphrases with dynamic chunking and resume support.")]
+struct Cli {
+    prompts: PathBuf,
+    output: PathBuf,
+    #[arg(long, default_value = "gemini-1.5-flash-latest")]
+    model: String,
+    #[arg(long = "log-name", default_value = "alpaca_500")]
+    log_name: String,
+    #[arg(long, default_value_t = 5)]
+    max_attempts: u8,
+    #[arg(long = "api-call-maximum", default_value_t = 10000)]
+    api_call_maximum: usize,
+    #[arg(long = "api-key")]
+    api_key: Option<String>,
+    #[arg(long, default_value_t = 163)]
+    max_paraphrases_per_chunk: usize,
+}
+
+fn read_records<P: AsRef<Path>>(p: P, logger: &mut Logger) -> Result<Vec<Record>> {
+    let raw = fs::read_to_string(&p).with_context(|| format!("cannot read {}", p.as_ref().display()))?;
+    let records: Vec<Record> = serde_json::from_str(&raw).context("JSON parse error")?;
+    if records.is_empty() {
+        logger.log("[warn] Prompts file contained 0 records.");
+    }
+    Ok(records)
+}
+
+fn build_eval_prompt(original: &str, batch: &[(String, String)]) -> (String, String) {
+    let instructions = String::from(
+r#"You are an expert in linguistic semantics. Your task is to compare each provided 'paraphrase' against the 'Instruction original'.
+Your entire focus must be on the **semantic content of the request**. Ignore any differences in style, tone, politeness, or wording.
+Score every single paraphrase **independently** using an **integer from 0 to 5**.
+- **5 (Perfect paraphrase):** This prompt would be understood by the average English person as asking for the *exact same information or action* as the original. Nothing has been added or removed from the core request. It is in English and asking for the same thing.
+- **4 (Minor deviation):** This prompt would be understood by the average English person as asking for the same thing, but might be interpreted as adding a small constraint or extra piece of information or intention (e.g., "... and explain"). It is still in English and asking for mostly the same thing.
+- **3 (Noticeable deviation):** This prompt adds a new requirement, omits a key part of the original request, or would not be understood by the average English person for producing the same answer (e.g., asking to form a list, or asking in a different language). It is still asking for the same thing, but with a noticeable change.
+- **2 (Major deviation):** The core task is substantially different, such as asking for a different type of information or action, or phrased in a way that would not be understood by the average English person or be understood as asking for an entirely different thing.
+- **1 (Different request):** The paraphrase is on the same broad topic but asks for something completely different.
+- **0 (Unrelated):** The paraphrase is nonsensical or irrelevant.
+You MUST return a valid JSON object. The JSON object should contain **every single key** from the "Paraphrases to score" list. Do NOT add comments, explanations, or use markdown code fences.
+
+Example Response Format:
+{
+  "instruct_aave": 5,
+  "instruct_apologetic": 5,
+  "instruct_comparison_table": 3
+}
+
+Instruction original:
+"#);
+    let mut paraphrases_text = String::from("\n\nParaphrases to score:\n");
+    for (key, text) in batch {
+        paraphrases_text.push_str(&format!("\"{}\": \"{}\"\n", key, text));
+    }
+    let full_original_text = format!("\"{}\"", original);
+    let mut full_prompt = instructions.clone();
+    full_prompt.push_str(&full_original_text);
+    full_prompt.push_str(&paraphrases_text);
+    (full_prompt, full_original_text)
+}
+
+async fn query_gemini(client: &reqwest::Client, key: &str, model: &str, prompt: String) -> Result<JsonMap<String, Value>> {
+    let url = format!("https://generativelanguage.googleapis.com/v1beta/models/{}:generateContent?key={}", model, key);
+    let body = json!({
+        "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+        "generationConfig": { "responseMimeType": "application/json", "temperature": 0.0, "topP": 0.95 }
+    });
+    let resp = client.post(url).json(&body).send().await?;
+    if !resp.status().is_success() {
+        return Err(anyhow!("{} — {}", resp.status(), resp.text().await?));
+    }
+    let raw: Value = resp.json().await?;
+    let text = raw["candidates"][0]["content"]["parts"][0]["text"].as_str().ok_or_else(|| anyhow!("Unexpected response structure"))?;
+    parse_response(text)
+}
+
+fn parse_response(s: &str) -> Result<JsonMap<String, Value>> {
+    let cleaned = s.trim().trim_start_matches("```json").trim_start_matches("```").trim_end_matches("```").trim();
+    if let Ok(v) = serde_json::from_str(cleaned) { return Ok(v); }
+    if let (Some(start), Some(end)) = (cleaned.find('{'), cleaned.rfind('}')) {
+        if let Ok(v) = serde_json::from_str(&cleaned[start..=end]) { return Ok(v); }
+    }
+    Err(anyhow!("Could not parse valid JSON from response: {}", s))
+}
+
+fn load_status<P: AsRef<Path>>(path: P) -> Result<HashMap<u32,bool>> {
+    if path.as_ref().exists() {
+        let f = fs::File::open(&path)?;
+        let raw: HashMap<u32, bool> = serde_json::from_reader(f)?;
+        Ok(raw)
+    } else {
+        let mut map = HashMap::new();
+        for id in 0..=500 {
+            map.insert(id, false);
+        }
+        let f = fs::File::create(&path)?;
+        serde_json::to_writer_pretty(f, &map)?;
+        Ok(map)
+    }
+}
+
+fn save_status<P: AsRef<Path>>(path: P, status: &HashMap<u32, bool>) -> anyhow::Result<()> {
+    let f = fs::File::create(path)?;
+    serde_json::to_writer_pretty(f, status)?;
+    Ok(())
+}
+
+#[tokio::main]
+async fn main() -> Result<()> {
+    let cli = Cli::parse();
+    let api_key = cli.api_key.or_else(|| std::env::var("GOOGLE_API_KEY").ok())
+        .context("Missing Google API key. Provide it with --api-key or $GOOGLE_API_KEY")?;
+
+    let rpm = match cli.model.as_str() {
+        "gemini-2.5-flash-preview-05-20"     => 10u32,
+        "gemini-2.5-flash-lite-preview-06-17" => 15u32,
+        _                                     => 5u32,
+    };
+
+    let base_quota = Quota::with_period(StdDuration::from_secs(60))
+        .expect("60s is nonzero, so this always returns Some");
+    let nz = NonZeroU32::new(rpm).expect("rpm must be nonzero");
+    let quota = base_quota.allow_burst(nz);
+    let limiter = RateLimiter::direct(quota);
+    
+    fs::create_dir_all("logs")?;
+    let stem = cli.output.file_stem().expect("Output must have a file name");
+    let ts   = Local::now().format("%Y-%m-%d_%H-%M-%S").to_string();
+    let filename = format!(
+        "{}_{}_{}.log",
+        stem.to_string_lossy(),
+        cli.log_name,
+        ts,
+    );
+
+    let log_path = PathBuf::from("logs").join(filename);
+    let mut logger = Logger::new(&log_path)?;
+    logger.log(&format!("Script started. Model: {}", cli.model));
+
+    let headers = HeaderMap::new();
+    let client = reqwest::Client::builder().default_headers(headers).timeout(Duration::from_secs(180)).build()?;
+    let bpe = tiktoken_rs::p50k_base().unwrap();
+    let model_limits = get_model_limits(&cli.model);
+    let effective_token_limit = (model_limits.input as f64 * 0.5) as usize;
+    let status_file = PathBuf::from("logs")
+        .join(format!("id_status_{}.json", cli.log_name));
+    let mut id_status = load_status(&status_file)
+        .context("Unable to load or initialize id_status.json")?;
+    let input_records = read_records(&cli.prompts, &mut logger)?;
+
+    let mut results_map: HashMap<u32, JsonMap<String, Value>> = if cli.output.exists() {
+        let file = fs::File::open(&cli.output)?;
+        let existing_vec: Vec<JsonMap<String, Value>> = serde_json::from_reader(file).unwrap_or_default();
+        logger.log(&format!("Loaded {} existing results from output file.", existing_vec.len()));
+        existing_vec.into_iter().filter_map(|entry| {
+            entry["prompt_count"].as_u64().map(|id| (id as u32, entry))
+        }).collect()
+    } else {
+        HashMap::new()
+    };
+
+    let pb = ProgressBar::new(input_records.len() as u64);
+    pb.set_style(ProgressStyle::default_bar()
+        .template("{spinner:.green} [{elapsed_precise}] [{bar:40.cyan/blue}] {pos}/{len} ({percent}%) - ID {msg}")?
+        .progress_chars("=>-"));
+
+    let mut api_calls_made = 0;
+    let mut all_errors: HashMap<u32, Vec<String>> = HashMap::new();
+
+    'outer: for record in input_records {
+        let prompt_id = record.prompt_count;
+        if id_status.get(&prompt_id).copied().unwrap_or(false) {
+            pb.inc(1);
+            continue;
+        }
+        pb.set_message(format!("{}", prompt_id));
+
+        let all_paraphrases_in_input: Vec<_> = record.extra.iter()
+            .filter_map(|(k, v)| if k.starts_with("instruct_") { v.as_str().map(|s| (k.clone(), s.to_string())) } else { None })
+            .collect();
+
+        let scored_keys: HashSet<String> = results_map.get(&prompt_id)
+            .and_then(|entry| entry.get("scores"))
+            .and_then(|scores| scores.as_object())
+            .map(|scores_map| scores_map.keys().cloned().collect())
+            .unwrap_or_default();
+
+        let mut paraphrases_to_process: Vec<_> = all_paraphrases_in_input.into_iter()
+            .filter(|(key, _)| !scored_keys.contains(key))
+            .collect();
+        
+        if paraphrases_to_process.is_empty() {
+            pb.inc(1);
+            continue; // Skip if all paraphrases for this ID are already scored
+        }
+        logger.log(&format!("[info] ID {}: Found {} unscored paraphrases to process.", prompt_id, paraphrases_to_process.len()));
+            
+        let mut new_scores_for_this_id = JsonMap::new();
+
+        while !paraphrases_to_process.is_empty() {
+            if api_calls_made >= cli.api_call_maximum { logger.log("[warn] API call maximum reached. Halting run."); break 'outer; }
+
+            let (base_prompt_template, _) = build_eval_prompt(&record.instruction_original, &[]);
+            let mut current_tokens = bpe.encode_with_special_tokens(&base_prompt_template).len();
+            let mut chunk_paraphrases = Vec::new();
+            
+            let mut i = 0;
+            while i < paraphrases_to_process.len()
+                  && chunk_paraphrases.len() < cli.max_paraphrases_per_chunk
+            {
+                let (key, text) = &paraphrases_to_process[i];
+                let paraphrase_line = format!("\"{}\": \"{}\"\n", key, text);
+                let paraphrase_tokens = bpe.encode_with_special_tokens(&paraphrase_line).len();
+                if current_tokens + paraphrase_tokens > effective_token_limit { break; }
+                current_tokens += paraphrase_tokens;
+                chunk_paraphrases.push((key.clone(), text.clone()));
+                i += 1;
+            }
+
+            if chunk_paraphrases.is_empty() && !paraphrases_to_process.is_empty() {
+                let err_msg = format!("Paraphrase '{}' is too large to fit in a single API call.", paraphrases_to_process[0].0);
+                logger.log(&format!("[error] ID {}: {}", prompt_id, &err_msg));
+                all_errors.entry(prompt_id).or_default().push(err_msg);
+                paraphrases_to_process.remove(0); continue;
+            }
+            paraphrases_to_process.drain(0..i);
+            
+            let (prompt, _) = build_eval_prompt(&record.instruction_original, &chunk_paraphrases);
+            api_calls_made += 1;
+            let mut success = false;
+            
+            for attempt in 1..=cli.max_attempts {
+                limiter.until_ready().await;
+
+                logger.log(&format!(
+                    "[info] ID {}: Calling API for chunk of {} paraphrases (attempt {}/{})",
+                    prompt_id,
+                    chunk_paraphrases.len(),
+                    attempt,
+                    cli.max_attempts
+                ));
+
+                match query_gemini(&client, &api_key, &cli.model, prompt.clone()).await {
+                    Ok(parsed_scores) => {
+                        logger.log(&format!(
+                            "[info] ID {}: API call SUCCEEDED on attempt {}",
+                            prompt_id, attempt
+                        ));
+                        new_scores_for_this_id.extend(parsed_scores);
+                        success = true;
+                        break;
+                    }
+                    Err(e) => {
+                        logger.log(&format!(
+                            "[error] ID {}: API call FAILED on attempt {}: {}",
+                            prompt_id, attempt, e
+                        ));
+                        if attempt < cli.max_attempts {
+                            let backoff_secs = 3 * attempt as u64;
+                            logger.log(&format!(
+                                "[info] ID {}: Backing off for {}s before retry",
+                                prompt_id, backoff_secs
+                            ));
+                            sleep(Duration::from_secs(backoff_secs)).await;
+                        }
+                    }
+                }
+            }
+
+            if !success {
+                let err_msg = format!("Chunk of {} items failed after {} attempts.", chunk_paraphrases.len(), cli.max_attempts);
+                logger.log(&format!("[fatal] ID {}: {}", prompt_id, &err_msg));
+                all_errors.entry(prompt_id).or_default().push(err_msg);
+            } //else {
+        }
+        
+        if !new_scores_for_this_id.is_empty() {
+            let entry = results_map.entry(prompt_id).or_insert_with(|| {
+                json!({
+                    "prompt_count": prompt_id,
+                    "instruction_original": record.instruction_original,
+                    "scores": {}
+                }).as_object().unwrap().clone()
+            });
+            let scores = entry.get_mut("scores").unwrap().as_object_mut().unwrap();
+            scores.extend(new_scores_for_this_id);
+        }
+
+        let mut final_results_vec: Vec<_> = results_map.values().cloned().collect();
+        final_results_vec.sort_by_key(|e| e["prompt_count"].as_u64().unwrap_or(0));
+
+        let mut writer = BufWriter::new(fs::File::create(&cli.output)?);
+        serde_json::to_writer_pretty(&mut writer, &final_results_vec)?;
+        writer.flush()?;
+
+        pb.inc(1);
+        id_status.insert(prompt_id, true);
+        save_status(&status_file, &id_status)
+            .context("Failed to write updated id_status.json")?;
+    }
+    
+    pb.finish_with_message("Processing complete");
+    logger.log("RUN FINISHED");
+    if all_errors.is_empty() {
+        logger.log("No fatal errors were recorded during the run.");
+    } else {
+        logger.log(&format!("!!! Found fatal errors for {} prompt IDs:", all_errors.len()));
+        for (id, errors) in &all_errors {
+            logger.log(&format!("  - ID {}:", id));
+            for err in errors { logger.log(&format!("    - {}", err)); }
+        }
+    }
+    Ok(())
+}

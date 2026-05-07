@@ -1,0 +1,4 @@
+dataset,count,sum,percentage
+alpaca,2,1,50.0
+gsm8k,1,0,0.0
+mmlu,1,0,0.0

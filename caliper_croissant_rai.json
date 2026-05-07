@@ -1,0 +1,1004 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "arrayShape": "cr:arrayShape",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "containedIn": "cr:containedIn",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "description": {
+      "@container": "@language"
+    },
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileObject": "cr:fileObject",
+    "fileProperty": "cr:fileProperty",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isArray": "cr:isArray",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "name": {
+      "@container": "@language"
+    },
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform",
+    "unArchive": "cr:unArchive"
+  },
+  "@type": "sc:Dataset",
+  "name": "CALIPER artifact",
+  "alternateName": "Corpus of ALternative LLM Inputs for Paraphrase Evaluation and Robustness",
+  "description": "CALIPER is a prompt-robustness dataset and benchmark snapshot built from Alpaca, GSM8K, and MMLU prompts. It contains the canonical CALIPER prompt paraphrases, model generations, response-quality metric scores, content-preservation scores, and Croissant/Responsible AI metadata for robustness analysis.",
+  "url": "https://huggingface.co/datasets/caliper-artifact/caliper-artifact",
+  "license": [
+    "https://www.apache.org/licenses/LICENSE-2.0",
+    "https://creativecommons.org/licenses/by-nc/4.0/",
+    "https://opensource.org/license/mit",
+    "https://ai.google.dev/gemma/terms",
+    "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/blob/main/LICENSE"
+  ],
+  "sdLicense": "https://www.apache.org/licenses/LICENSE-2.0",
+  "creator": [
+    {
+      "@type": "sc:Person",
+      "name": "Anonymous authors"
+    }
+  ],
+  "datePublished": "2026-05-04",
+  "version": "1.0.0",
+  "sdVersion": "1.0.0",
+  "citeAs": "Anonymous. CALIPER: Corpus of ALternative LLM Inputs for Paraphrase Evaluation and Robustness. 2026.",
+  "conformsTo": [
+    "http://mlcommons.org/croissant/1.1",
+    "http://mlcommons.org/croissant/RAI/1.0"
+  ],
+  "isLiveDataset": true,
+  "keywords": [
+    "prompt robustness",
+    "paraphrasing",
+    "large language models",
+    "evaluation",
+    "Alpaca",
+    "GSM8K",
+    "MMLU"
+  ],
+  "inLanguage": [
+    "en"
+  ],
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "caliper-anonymous-artifact",
+      "name": "caliper_artifact_repository",
+      "description": "Anonymous Hugging Face dataset repository containing the CALIPER artifact, including the canonical CALIPER dataset files.",
+      "contentUrl": "https://huggingface.co/datasets/caliper-artifact/caliper-artifact",
+      "encodingFormat": "text/html"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "alpaca-prompts-json",
+      "name": "prompts_paraphrases/alpaca_available.json",
+      "description": "Available Alpaca prompt/paraphrase shards merged from the local CALIPER artifact staging source.",
+      "contentUrl": "prompts_paraphrases/alpaca_available.json",
+      "encodingFormat": "application/json",
+      "containedIn": {
+        "fileObject": {
+          "@id": "caliper-anonymous-artifact"
+        },
+        "transform": {
+          "unArchive": true
+        }
+      }
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "gsm8k-prompts-json",
+      "name": "prompts_paraphrases/gsm8k_500.json",
+      "description": "GSM8K prompt records with original problems, paraphrase-style variants, and prompt identifiers.",
+      "contentUrl": "prompts_paraphrases/gsm8k_500.json",
+      "encodingFormat": "application/json",
+      "containedIn": {
+        "fileObject": {
+          "@id": "caliper-anonymous-artifact"
+        },
+        "transform": {
+          "unArchive": true
+        }
+      }
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "mmlu-prompts-json",
+      "name": "prompts_paraphrases/mmlu_500.json",
+      "description": "MMLU moral-scenarios prompt records with answer choices, subject metadata, paraphrase-style variants, and prompt identifiers.",
+      "contentUrl": "prompts_paraphrases/mmlu_500.json",
+      "encodingFormat": "application/json",
+      "containedIn": {
+        "fileObject": {
+          "@id": "caliper-anonymous-artifact"
+        },
+        "transform": {
+          "unArchive": true
+        }
+      }
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "content-preservation-json",
+      "name": "prompts_paraphrases/scores_content_preservation.json",
+      "description": "Content-preservation scores for prompt paraphrases, keyed by prompt and paraphrase style.",
+      "contentUrl": "prompts_paraphrases/scores_content_preservation.json",
+      "encodingFormat": "application/json",
+      "containedIn": {
+        "fileObject": {
+          "@id": "caliper-anonymous-artifact"
+        },
+        "transform": {
+          "unArchive": true
+        }
+      }
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "style-tags-json",
+      "name": "prompts_paraphrases/tags_paraphrases.json",
+      "description": "Mapping from paraphrase style keys to tag families.",
+      "contentUrl": "prompts_paraphrases/tags_paraphrases.json",
+      "encodingFormat": "application/json",
+      "containedIn": {
+        "fileObject": {
+          "@id": "caliper-anonymous-artifact"
+        },
+        "transform": {
+          "unArchive": true
+        }
+      }
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "model-response-json-files",
+      "name": "responses/**/*.json",
+      "description": "Model generations for Alpaca, GSM8K, and MMLU prompts under original and paraphrased prompt wordings.",
+      "encodingFormat": "application/json",
+      "includes": "responses/**/*.json",
+      "containedIn": {
+        "fileObject": {
+          "@id": "caliper-anonymous-artifact"
+        },
+        "transform": {
+          "unArchive": true
+        }
+      }
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "metric-score-json-files",
+      "name": "scores/**/*",
+      "description": "Response-quality metric score vectors for evaluated model generations.",
+      "encodingFormat": "application/json",
+      "includes": "scores/**/*",
+      "containedIn": {
+        "fileObject": {
+          "@id": "caliper-anonymous-artifact"
+        },
+        "transform": {
+          "unArchive": true
+        }
+      }
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "manifest-json",
+      "name": "manifest.json",
+      "description": "File manifest with sizes and SHA256 checksums.",
+      "contentUrl": "manifest.json",
+      "encodingFormat": "application/json",
+      "containedIn": {
+        "@id": "caliper-anonymous-artifact"
+      }
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "prompts_paraphrases-alpaca_500-json",
+      "name": "prompts_paraphrases/alpaca_500.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "prompts_paraphrases/alpaca_500.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "prompts_paraphrases-finetuning_50k-json",
+      "name": "prompts_paraphrases/finetuning_50k.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "prompts_paraphrases/finetuning_50k.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "paraphrase_answers-alpaca-Qwen2-5-3B-Instruct-json",
+      "name": "paraphrase_answers/alpaca/Qwen2.5-3B-Instruct.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "paraphrase_answers/alpaca/Qwen2.5-3B-Instruct.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "metric_scores-alpaca-Qwen2-5-3B-Instruct-json",
+      "name": "metric_scores/alpaca/Qwen2.5-3B-Instruct.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "metric_scores/alpaca/Qwen2.5-3B-Instruct.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "paraphrase_answers-alpaca-gemma-2-2b-it-json",
+      "name": "paraphrase_answers/alpaca/gemma-2-2b-it.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "paraphrase_answers/alpaca/gemma-2-2b-it.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "metric_scores-alpaca-gemma-2-2b-it-json",
+      "name": "metric_scores/alpaca/gemma-2-2b-it.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "metric_scores/alpaca/gemma-2-2b-it.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "paraphrase_answers-alpaca-gemma-2-9b-it-json",
+      "name": "paraphrase_answers/alpaca/gemma-2-9b-it.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "paraphrase_answers/alpaca/gemma-2-9b-it.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "metric_scores-alpaca-gemma-2-9b-it-json",
+      "name": "metric_scores/alpaca/gemma-2-9b-it.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "metric_scores/alpaca/gemma-2-9b-it.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "paraphrase_answers-gsm8k-Qwen2-5-3B-Instruct-json",
+      "name": "paraphrase_answers/gsm8k/Qwen2.5-3B-Instruct.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "paraphrase_answers/gsm8k/Qwen2.5-3B-Instruct.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "metric_scores-gsm8k-Qwen2-5-3B-Instruct-json",
+      "name": "metric_scores/gsm8k/Qwen2.5-3B-Instruct.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "metric_scores/gsm8k/Qwen2.5-3B-Instruct.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "paraphrase_answers-gsm8k-gemma-2-2b-it-json",
+      "name": "paraphrase_answers/gsm8k/gemma-2-2b-it.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "paraphrase_answers/gsm8k/gemma-2-2b-it.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "metric_scores-gsm8k-gemma-2-2b-it-json",
+      "name": "metric_scores/gsm8k/gemma-2-2b-it.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "metric_scores/gsm8k/gemma-2-2b-it.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "paraphrase_answers-gsm8k-gemma-2-9b-it-json",
+      "name": "paraphrase_answers/gsm8k/gemma-2-9b-it.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "paraphrase_answers/gsm8k/gemma-2-9b-it.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "metric_scores-gsm8k-gemma-2-9b-it-json",
+      "name": "metric_scores/gsm8k/gemma-2-9b-it.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "metric_scores/gsm8k/gemma-2-9b-it.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "paraphrase_answers-mmlu-Qwen2-5-3B-Instruct-json",
+      "name": "paraphrase_answers/mmlu/Qwen2.5-3B-Instruct.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "paraphrase_answers/mmlu/Qwen2.5-3B-Instruct.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "metric_scores-mmlu-Qwen2-5-3B-Instruct-json",
+      "name": "metric_scores/mmlu/Qwen2.5-3B-Instruct.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "metric_scores/mmlu/Qwen2.5-3B-Instruct.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "paraphrase_answers-mmlu-gemma-2-2b-it-json",
+      "name": "paraphrase_answers/mmlu/gemma-2-2b-it.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "paraphrase_answers/mmlu/gemma-2-2b-it.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "metric_scores-mmlu-gemma-2-2b-it-json",
+      "name": "metric_scores/mmlu/gemma-2-2b-it.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "metric_scores/mmlu/gemma-2-2b-it.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "paraphrase_answers-mmlu-gemma-2-9b-it-json",
+      "name": "paraphrase_answers/mmlu/gemma-2-9b-it.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "paraphrase_answers/mmlu/gemma-2-9b-it.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "metric_scores-mmlu-gemma-2-9b-it-json",
+      "name": "metric_scores/mmlu/gemma-2-9b-it.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "metric_scores/mmlu/gemma-2-9b-it.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-metric_scores-alpaca-Qwen2-5-3B-Instruct_sample100-json",
+      "name": "samples/metric_scores/alpaca/Qwen2.5-3B-Instruct_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/metric_scores/alpaca/Qwen2.5-3B-Instruct_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-metric_scores-alpaca-gemma-2-2b-it_sample100-json",
+      "name": "samples/metric_scores/alpaca/gemma-2-2b-it_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/metric_scores/alpaca/gemma-2-2b-it_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-metric_scores-alpaca-gemma-2-9b-it_sample100-json",
+      "name": "samples/metric_scores/alpaca/gemma-2-9b-it_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/metric_scores/alpaca/gemma-2-9b-it_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-metric_scores-gsm8k-Qwen2-5-3B-Instruct_sample100-json",
+      "name": "samples/metric_scores/gsm8k/Qwen2.5-3B-Instruct_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/metric_scores/gsm8k/Qwen2.5-3B-Instruct_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-metric_scores-gsm8k-gemma-2-2b-it_sample100-json",
+      "name": "samples/metric_scores/gsm8k/gemma-2-2b-it_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/metric_scores/gsm8k/gemma-2-2b-it_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-metric_scores-gsm8k-gemma-2-9b-it_sample100-json",
+      "name": "samples/metric_scores/gsm8k/gemma-2-9b-it_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/metric_scores/gsm8k/gemma-2-9b-it_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-metric_scores-mmlu-Qwen2-5-3B-Instruct_sample100-json",
+      "name": "samples/metric_scores/mmlu/Qwen2.5-3B-Instruct_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/metric_scores/mmlu/Qwen2.5-3B-Instruct_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-metric_scores-mmlu-gemma-2-2b-it_sample100-json",
+      "name": "samples/metric_scores/mmlu/gemma-2-2b-it_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/metric_scores/mmlu/gemma-2-2b-it_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-metric_scores-mmlu-gemma-2-9b-it_sample100-json",
+      "name": "samples/metric_scores/mmlu/gemma-2-9b-it_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/metric_scores/mmlu/gemma-2-9b-it_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-paraphrase_answers-alpaca-Qwen2-5-3B-Instruct_sample100-json",
+      "name": "samples/paraphrase_answers/alpaca/Qwen2.5-3B-Instruct_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/paraphrase_answers/alpaca/Qwen2.5-3B-Instruct_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-paraphrase_answers-alpaca-gemma-2-2b-it_sample100-json",
+      "name": "samples/paraphrase_answers/alpaca/gemma-2-2b-it_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/paraphrase_answers/alpaca/gemma-2-2b-it_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-paraphrase_answers-alpaca-gemma-2-9b-it_sample100-json",
+      "name": "samples/paraphrase_answers/alpaca/gemma-2-9b-it_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/paraphrase_answers/alpaca/gemma-2-9b-it_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-paraphrase_answers-gsm8k-Qwen2-5-3B-Instruct_sample100-json",
+      "name": "samples/paraphrase_answers/gsm8k/Qwen2.5-3B-Instruct_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/paraphrase_answers/gsm8k/Qwen2.5-3B-Instruct_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-paraphrase_answers-gsm8k-gemma-2-2b-it_sample100-json",
+      "name": "samples/paraphrase_answers/gsm8k/gemma-2-2b-it_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/paraphrase_answers/gsm8k/gemma-2-2b-it_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-paraphrase_answers-gsm8k-gemma-2-9b-it_sample100-json",
+      "name": "samples/paraphrase_answers/gsm8k/gemma-2-9b-it_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/paraphrase_answers/gsm8k/gemma-2-9b-it_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-paraphrase_answers-mmlu-Qwen2-5-3B-Instruct_sample100-json",
+      "name": "samples/paraphrase_answers/mmlu/Qwen2.5-3B-Instruct_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/paraphrase_answers/mmlu/Qwen2.5-3B-Instruct_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-paraphrase_answers-mmlu-gemma-2-2b-it_sample100-json",
+      "name": "samples/paraphrase_answers/mmlu/gemma-2-2b-it_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/paraphrase_answers/mmlu/gemma-2-2b-it_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-paraphrase_answers-mmlu-gemma-2-9b-it_sample100-json",
+      "name": "samples/paraphrase_answers/mmlu/gemma-2-9b-it_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/paraphrase_answers/mmlu/gemma-2-9b-it_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-prompts_paraphrases-alpaca_500_sample100-json",
+      "name": "samples/prompts_paraphrases/alpaca_500_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/prompts_paraphrases/alpaca_500_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-prompts_paraphrases-finetuning_50k_sample100-json",
+      "name": "samples/prompts_paraphrases/finetuning_50k_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/prompts_paraphrases/finetuning_50k_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-prompts_paraphrases-gsm8k_500_sample100-json",
+      "name": "samples/prompts_paraphrases/gsm8k_500_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/prompts_paraphrases/gsm8k_500_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-prompts_paraphrases-mmlu_500_sample100-json",
+      "name": "samples/prompts_paraphrases/mmlu_500_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/prompts_paraphrases/mmlu_500_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-prompts_paraphrases-scores_content_preservation_sample100-json",
+      "name": "samples/prompts_paraphrases/scores_content_preservation_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/prompts_paraphrases/scores_content_preservation_sample100.json",
+      "encodingFormat": "application/json"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "samples-prompts_paraphrases-tags_paraphrases_sample100-json",
+      "name": "samples/prompts_paraphrases/tags_paraphrases_sample100.json",
+      "description": "Canonical CALIPER dataset file mirrored from the original CALIPER dataset release.",
+      "contentUrl": "samples/prompts_paraphrases/tags_paraphrases_sample100.json",
+      "encodingFormat": "application/json"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "alpaca_prompt_records",
+      "name": "alpaca_prompt_records",
+      "description": "Alpaca prompt records, including original instructions and paraphrase-style variants.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "alpaca_prompt_records/prompt_count",
+          "name": "prompt_count",
+          "description": "Numeric prompt index used to join prompt, response, content-preservation, and metric-score artifacts.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "alpaca-prompts-json"
+            },
+            "extract": {
+              "jsonPath": "$[*].prompt_count"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "alpaca_prompt_records/prompt_id",
+          "name": "prompt_id",
+          "description": "Prompt identifier when present in the prompt file.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "alpaca-prompts-json"
+            },
+            "extract": {
+              "jsonPath": "$[*].prompt_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "alpaca_prompt_records/instruction_original",
+          "name": "instruction_original",
+          "description": "Original Alpaca instruction before paraphrasing.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "alpaca-prompts-json"
+            },
+            "extract": {
+              "jsonPath": "$[*].instruction_original"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "alpaca_prompt_records/input",
+          "name": "input",
+          "description": "Alpaca input field associated with the instruction.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "alpaca-prompts-json"
+            },
+            "extract": {
+              "jsonPath": "$[*].input"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "alpaca_prompt_records/output",
+          "name": "output",
+          "description": "Reference output supplied by the Alpaca source prompt.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "alpaca-prompts-json"
+            },
+            "extract": {
+              "jsonPath": "$[*].output"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "alpaca_prompt_records/paraphrase_variants_by_style",
+          "name": "paraphrase_variants_by_style",
+          "description": "Prompt-level JSON object containing the systematically generated paraphrase-style variants.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "alpaca-prompts-json"
+            },
+            "extract": {
+              "jsonPath": "$[*]"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "gsm8k_prompt_records",
+      "name": "gsm8k_prompt_records",
+      "description": "GSM8K prompt records, including original problems and paraphrase-style variants.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "gsm8k_prompt_records/prompt_count",
+          "name": "prompt_count",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "gsm8k-prompts-json"
+            },
+            "extract": {
+              "jsonPath": "$[*].prompt_count"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "gsm8k_prompt_records/instruction_original",
+          "name": "instruction_original",
+          "description": "Original GSM8K problem before paraphrasing.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "gsm8k-prompts-json"
+            },
+            "extract": {
+              "jsonPath": "$[*].instruction_original"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "gsm8k_prompt_records/paraphrase_variants_by_style",
+          "name": "paraphrase_variants_by_style",
+          "description": "Prompt-level JSON object containing the systematically generated paraphrase-style variants.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "gsm8k-prompts-json"
+            },
+            "extract": {
+              "jsonPath": "$[*]"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "mmlu_prompt_records",
+      "name": "mmlu_prompt_records",
+      "description": "MMLU moral-scenarios prompt records, including choices, subject metadata, and paraphrase-style variants.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "mmlu_prompt_records/prompt_count",
+          "name": "prompt_count",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "mmlu-prompts-json"
+            },
+            "extract": {
+              "jsonPath": "$[*].prompt_count"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "mmlu_prompt_records/subject",
+          "name": "subject",
+          "description": "MMLU subject field for the prompt.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "mmlu-prompts-json"
+            },
+            "extract": {
+              "jsonPath": "$[*].subject"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "mmlu_prompt_records/choices",
+          "name": "choices",
+          "description": "Multiple-choice answer options.",
+          "dataType": "sc:Text",
+          "isArray": true,
+          "source": {
+            "fileObject": {
+              "@id": "mmlu-prompts-json"
+            },
+            "extract": {
+              "jsonPath": "$[*].choices"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "mmlu_prompt_records/paraphrase_variants_by_style",
+          "name": "paraphrase_variants_by_style",
+          "description": "Prompt-level JSON object containing the systematically generated paraphrase-style variants.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "mmlu-prompts-json"
+            },
+            "extract": {
+              "jsonPath": "$[*]"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "content_preservation_records",
+      "name": "content_preservation_records",
+      "description": "Content-preservation score records used to filter meaning-preserving paraphrases.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "content_preservation_records/prompt_count",
+          "name": "prompt_count",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "content-preservation-json"
+            },
+            "extract": {
+              "jsonPath": "$[*].prompt_count"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "content_preservation_records/instruction_original",
+          "name": "instruction_original",
+          "description": "Original instruction associated with the content-preservation score record.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "content-preservation-json"
+            },
+            "extract": {
+              "jsonPath": "$[*].instruction_original"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "content_preservation_records/scores_by_style",
+          "name": "scores_by_style",
+          "description": "Mapping from paraphrase style key to 0--5 content-preservation score.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "content-preservation-json"
+            },
+            "extract": {
+              "jsonPath": "$[*].scores"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "style_tag_map",
+      "name": "style_tag_map",
+      "description": "Mapping from paraphrase style keys to tag-family labels.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "style_tag_map/json",
+          "name": "json",
+          "description": "Complete JSON mapping from style key to list of tag-family labels.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "style-tags-json"
+            },
+            "extract": {
+              "fileProperty": "content"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "model_response_files",
+      "name": "model_response_files",
+      "description": "Files containing model generations for prompt-style variants.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "model_response_files/file_path",
+          "name": "file_path",
+          "description": "Path of the response file within the artifact.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "model-response-json-files"
+            },
+            "extract": {
+              "fileProperty": "filepath"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "model_response_files/json_content",
+          "name": "json_content",
+          "description": "JSON content mapping prompt/style identifiers to generated model responses.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "model-response-json-files"
+            },
+            "extract": {
+              "fileProperty": "content"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "metric_score_files",
+      "name": "metric_score_files",
+      "description": "Files containing ten-dimensional response-quality metric vectors.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "metric_score_files/file_path",
+          "name": "file_path",
+          "description": "Path of the metric-score file within the artifact.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "metric-score-json-files"
+            },
+            "extract": {
+              "fileProperty": "filepath"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "metric_score_files/json_content",
+          "name": "json_content",
+          "description": "JSON content mapping prompt/style identifiers to ten response-quality metric scores.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "metric-score-json-files"
+            },
+            "extract": {
+              "fileProperty": "content"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "rai:dataCollection": "Base prompts were selected from existing public benchmark resources (Alpaca, GSM8K, and MMLU). Paraphrase variants were generated using style templates and then scored for semantic content preservation. Model responses and response-quality scores were generated as evaluation artifacts.",
+  "rai:dataCollectionType": [
+    "Derived public benchmark prompts",
+    "Machine-generated paraphrases",
+    "Machine-generated model responses",
+    "Machine-generated content-preservation and task-quality annotations"
+  ],
+  "rai:dataCollectionRawData": "Source prompt material comes from Alpaca, GSM8K, and MMLU. CALIPER adds generated paraphrases, generated model responses, automated content-preservation scores, automated response-quality scores, style-to-tag mappings, and the canonical mirrored CALIPER release files from source commit 3a340c6185b0fc9ebae7ea7601d421a622ce6dad.",
+  "rai:hasSyntheticData": true,
+  "rai:dataPreprocessingProtocol": [
+    "Records are organized by dataset, prompt identifier, paraphrase style key, tag family, generated response, content-preservation score, and metric score vector.",
+    "Analyses reported in the paper condition on content-preservation scores of at least 4."
+  ],
+  "rai:dataAnnotationProtocol": [
+    "Each paraphrase receives a 0--5 content-preservation score comparing the original prompt and paraphrase.",
+    "Each model response receives ten 0--10 task-quality scores.",
+    "All reported automated scores used gemini-2.5-flash-preview-05-20 as the judge model, run in September 2025 with deterministic decoding."
+  ],
+  "rai:dataAnnotationPlatform": [
+    "Gemini 2.5 Flash Preview judge model for automated scoring"
+  ],
+  "rai:annotationsPerItem": "One automated content-preservation score is recorded for each prompt-style pair where scoring is available. One vector of ten automated task-quality scores is recorded for each scored model response.",
+  "rai:annotatorDemographics": [],
+  "rai:machineAnnotationTools": [
+    "gemini-2.5-flash-preview-05-20 for content-preservation and task-quality scores; all reported automated scores used this judge model, run in September 2025 with deterministic decoding (temperature 0)."
+  ],
+  "rai:dataAnnotationAnalysis": [],
+  "rai:dataLimitations": [
+    "The benchmark measures robustness to text prompt paraphrases and should not be treated as a complete evaluation of all LLM reliability properties.",
+    "Content preservation is judged from an average English reader perspective, which may under-credit multilingual, encoded, or dialectal variants that are meaningful to other users.",
+    "The reported benchmark snapshot covers a limited set of open-weight instruction models and deterministic decoding.",
+    "Automated judge scores may reflect preferences or blind spots of the judge model and should be audited for high-stakes use."
+  ],
+  "rai:dataUseCases": [
+    "Evaluating LLM robustness to meaning-preserving prompt rewording.",
+    "Auditing failure modes by paraphrase style and tag family.",
+    "Developing paraphrase-aware evaluation, training, and mitigation methods.",
+    "Inspecting average-case and worst-style robustness gaps across tasks and models."
+  ],
+  "rai:dataSocialImpact": "CALIPER is intended to improve transparency about prompt sensitivity and to help identify robustness gaps affecting users with different wording styles, registers, dialects, and formatting habits. It could also be misused to search for brittle prompts or bypasses, so results should be used for defensive auditing, mitigation, and responsible reporting.",
+  "rai:dataBiases": [
+    "The style taxonomy reflects the authors' chosen categories and may not cover all real-world language communities or interaction styles.",
+    "Dialect and register labels are diagnostic groupings for model behavior, not judgments of linguistic quality.",
+    "Source benchmark choices shape the task distribution and may bias conclusions toward instruction following, grade-school mathematics, and moral reasoning."
+  ],
+  "rai:personalSensitiveInformation": [
+    "The dataset does not intentionally collect personal data. It derives from public benchmark prompts and generated paraphrases/responses. Users should still inspect downstream samples before deploying derived artifacts."
+  ],
+  "rai:dataReleaseMaintenancePlan": "The dataset is versioned on the hosting platform. The anonymous submission artifact mirrors the canonical CALIPER dataset files from source commit 3a340c6185b0fc9ebae7ea7601d421a622ce6dad and adds license and Croissant/RAI metadata. Updates should document changes to prompt files, paraphrase styles, model outputs, scoring configuration, and Croissant/RAI metadata."
+}

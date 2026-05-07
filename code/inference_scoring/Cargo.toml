@@ -1,0 +1,93 @@
+[package]
+name = "caliper_inference_scoring"
+version = "1.0.0"
+edition = "2021"
+
+[[bin]]
+name = "drop_keys"
+path = "src/drop_keys.rs"
+
+[[bin]]
+name = "merge_any_ids"
+path = "src/merge_any_ids.rs"
+
+[[bin]]
+name = "merge_instructs"
+path = "src/merge_instructs.rs"
+
+[[bin]]
+name = "merge_issues"
+path = "src/merge_issues.rs"
+
+[[bin]]
+name = "merge_jsons"
+path = "src/merge_jsons.rs"
+
+[[bin]]
+name = "merge_random_ids"
+path = "src/merge_random_ids.rs"
+
+[[bin]]
+name = "phrx_equivalence_score"
+path = "src/phrx_equivalence_score.rs"
+
+[[bin]]
+name = "results_assess_mmlu_waits"
+path = "src/results_assess_mmlu_waits.rs"
+
+[[bin]]
+name = "results_assess_no_id"
+path = "src/results_assess_noID.rs"
+
+[[bin]]
+name = "results_find_issues"
+path = "src/results_find_issues.rs"
+
+[[bin]]
+name = "results_patch"
+path = "src/results_patch.rs"
+
+[[bin]]
+name = "results_patch_mmlu"
+path = "src/results_patch_mmlu.rs"
+
+[[bin]]
+name = "sort_merge_ids"
+path = "src/sort_merge_ids.rs"
+
+[[bin]]
+name = "split_any_ids"
+path = "src/split_any_ids.rs"
+
+[[bin]]
+name = "split_jsons"
+path = "src/split_jsons.rs"
+
+[[bin]]
+name = "split_prompt_counts"
+path = "src/split_prompt_counts.rs"
+
+[[bin]]
+name = "split_random_ids"
+path = "src/split_random_ids.rs"
+
+[[bin]]
+name = "summarise_scores"
+path = "src/summarise_scores.rs"
+
+[dependencies]
+anyhow = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+clap = { version = "4", features = ["derive"] }
+governor = "0.4"
+indicatif = "0.17"
+log = "0.4"
+nonzero_ext = "0.1"
+regex = "1"
+reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+simplelog = "0.12"
+tiktoken-rs = "0.6.0"
+time = "=0.3.36"
+tokio = { version = "1", features = ["full"] }

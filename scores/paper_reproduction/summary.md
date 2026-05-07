@@ -1,0 +1,18 @@
+# Paraphrase Robustness Evaluation Summary
+- Data CSV: `tf_long_data.csv`
+
+## Tables
+
+- **tf_original_overall** → CSV: `tf_original_overall.csv`, TXT: `tf_original_overall.txt`
+- **tf_paraphrased_overall** → CSV: `tf_paraphrased_overall.csv`, TXT: `tf_paraphrased_overall.txt`
+- **tf_by_dataset** → CSV: `tf_by_dataset.csv`, TXT: `tf_by_dataset.txt`
+- **tf_by_tag** → CSV: `tf_by_tag.csv`, TXT: `tf_by_tag.txt`
+- **tf_by_paraphrase_type** → CSV: `tf_by_paraphrase_type.csv`, TXT: `tf_by_paraphrase_type.txt`
+
+## Plots
+
+- `plots/boxplot_tf_Alpaca.png`
+- `plots/boxplot_tf_GSM8K.png`
+- `plots/boxplot_tf_MMLU.png`
+- `plots/clustered_bar_mean_tf.png`
+- `plots/scatter_cp_vs_tf.png`

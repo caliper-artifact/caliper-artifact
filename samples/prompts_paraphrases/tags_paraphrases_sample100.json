@@ -1,0 +1,546 @@
+{
+  "instruct_90char_bullet": [
+    "format",
+    "length_brevity",
+    "visual layout",
+    "formatting",
+    "style"
+  ],
+  "instruct_aave": [
+    "dialect",
+    "language",
+    "slangy",
+    "register",
+    "informal",
+    "cultural_reference"
+  ],
+  "instruct_absurdist": [
+    "style",
+    "tone",
+    "playfulness",
+    "genre"
+  ],
+  "instruct_acronyms_spelled_out": [
+    "formatting",
+    "special_characters",
+    "technical"
+  ],
+  "instruct_advertisement": [
+    "genre",
+    "style",
+    "tone",
+    "format"
+  ],
+  "instruct_all_caps": [
+    "formatting",
+    "emphasis",
+    "style"
+  ],
+  "instruct_all_caps_and_typo": [
+    "formatting",
+    "emphasis",
+    "error_and_edge_cases",
+    "spelling_change",
+    "obstructions"
+  ],
+  "instruct_all_caps_and_typo_and_missing_bracket": [
+    "formatting",
+    "emphasis",
+    "error_and_edge_cases",
+    "spelling_change",
+    "obstructions",
+    "punctuation"
+  ],
+  "instruct_all_caps_and_typo_and_missing_bracket_and_random_characters": [
+    "formatting",
+    "emphasis",
+    "error_and_edge_cases",
+    "spelling_change",
+    "obstructions",
+    "noise",
+    "special_characters"
+  ],
+  "instruct_ambiguous_scope": [
+    "obfuscation",
+    "error_and_edge_cases"
+  ],
+  "instruct_american_english": [
+    "dialect",
+    "language"
+  ],
+  "instruct_apologetic": [
+    "tone",
+    "speech-act",
+    "emotion"
+  ],
+  "instruct_apology": [
+    "tone",
+    "speech-act",
+    "emotion"
+  ],
+  "instruct_archaic": [
+    "language",
+    "register",
+    "style"
+  ],
+  "instruct_australian_english": [
+    "dialect",
+    "language"
+  ],
+  "instruct_authoritative": [
+    "tone",
+    "voice",
+    "register",
+    "formal"
+  ],
+  "instruct_base64": [
+    "encoding",
+    "ciphers",
+    "technical"
+  ],
+  "instruct_british_english": [
+    "dialect",
+    "language"
+  ],
+  "instruct_bullet_list": [
+    "format",
+    "formatting",
+    "visual layout"
+  ],
+  "instruct_bulleted_outline": [
+    "format",
+    "formatting",
+    "visual layout",
+    "structural_interference"
+  ],
+  "instruct_bureaucratic": [
+    "style",
+    "tone",
+    "register",
+    "formal"
+  ],
+  "instruct_casual": [
+    "tone",
+    "informal",
+    "register"
+  ],
+  "instruct_casual_chat": [
+    "tone",
+    "informal",
+    "dialogue_frames",
+    "register"
+  ],
+  "instruct_checklist": [
+    "format",
+    "formatting",
+    "visual layout"
+  ],
+  "instruct_checklist_markdown": [
+    "format",
+    "formatting",
+    "special_characters",
+    "visual layout"
+  ],
+  "instruct_chemical_smiles": [
+    "encoding",
+    "technical",
+    "domain_jargon"
+  ],
+  "instruct_child_directed": [
+    "audience",
+    "tone",
+    "register",
+    "informal"
+  ],
+  "instruct_chinese_simplified": [
+    "language"
+  ],
+  "instruct_choice_question": [
+    "question_type",
+    "speech-act"
+  ],
+  "instruct_cleft_it_is": [
+    "syntax_tweaks",
+    "style"
+  ],
+  "instruct_cockney": [
+    "dialect",
+    "language",
+    "slangy",
+    "register"
+  ],
+  "instruct_code_fence": [
+    "format",
+    "formatting"
+  ],
+  "instruct_colloquial": [
+    "style",
+    "tone",
+    "informal"
+  ],
+  "instruct_command": [
+    "speech-act",
+    "voice"
+  ],
+  "instruct_comparison_table": [
+    "format",
+    "formatting",
+    "visual layout"
+  ],
+  "instruct_condensed_then_expand": [
+    "structure",
+    "format",
+    "verbosity",
+    "compression",
+    "redundancy"
+  ],
+  "instruct_condensed_then_expand_with_examples": [
+    "structure",
+    "format",
+    "verbosity",
+    "compression",
+    "redundancy"
+  ],
+  "instruct_condensed_then_expand_with_examples_and_explanations": [
+    "structure",
+    "format",
+    "verbosity",
+    "compression",
+    "redundancy"
+  ],
+  "instruct_condensed_then_expand_with_examples_and_explanations_and_summary": [
+    "structure",
+    "format",
+    "verbosity",
+    "compression",
+    "redundancy"
+  ],
+  "instruct_condensed_then_expand_with_examples_and_explanations_and_summary_and_risks": [
+    "structure",
+    "format",
+    "verbosity",
+    "compression",
+    "redundancy"
+  ],
+  "instruct_condensed_then_expand_with_examples_and_explanations_and_summary_and_risks_and_benefits": [
+    "structure",
+    "format",
+    "verbosity",
+    "compression",
+    "redundancy"
+  ],
+  "instruct_condensed_then_expand_with_examples_and_explanations_and_summary_and_risks_and_benefits_and_references": [
+    "structure",
+    "format",
+    "verbosity",
+    "compression",
+    "redundancy"
+  ],
+  "instruct_condensed_then_expand_with_examples_and_explanations_and_summary_and_risks_and_benefits_and_references_and_citations": [
+    "structure",
+    "format",
+    "verbosity",
+    "compression",
+    "redundancy"
+  ],
+  "instruct_condensed_then_expand_with_examples_and_explanations_and_summary_and_risks_and_benefits_and_references_and_citations_and_counterarguments": [
+    "structure",
+    "format",
+    "verbosity",
+    "compression",
+    "redundancy"
+  ],
+  "instruct_condensed_then_expand_with_examples_and_explanations_and_summary_and_risks_and_benefits_and_references_and_citations_and_counterarguments_and_rebuttals": [
+    "structure",
+    "format",
+    "verbosity",
+    "compression",
+    "redundancy"
+  ],
+  "instruct_condensed_then_expand_with_examples_and_explanations_and_summary_and_risks_and_benefits_and_references_and_citations_and_counterarguments_and_rebuttals_and_analogies": [
+    "structure",
+    "format",
+    "verbosity",
+    "compression",
+    "redundancy"
+  ],
+  "instruct_condensed_then_expand_with_examples_and_explanations_and_summary_and_risks_and_benefits_and_references_and_citations_and_counterarguments_and_rebuttals_and_analogies_and_metaphors": [
+    "structure",
+    "format",
+    "verbosity",
+    "compression",
+    "redundancy"
+  ],
+  "instruct_confident": [
+    "tone",
+    "voice"
+  ],
+  "instruct_contractions": [
+    "syntax_tweaks",
+    "style",
+    "register",
+    "informal"
+  ],
+  "instruct_contradictory_ask": [
+    "obfuscation",
+    "error_and_edge_cases"
+  ],
+  "instruct_coord_to_subord": [
+    "syntax_tweaks",
+    "structure"
+  ],
+  "instruct_csv_line": [
+    "format",
+    "formatting"
+  ],
+  "instruct_csv_row": [
+    "format",
+    "formatting"
+  ],
+  "instruct_culinary_jargon": [
+    "domain_jargon",
+    "technical"
+  ],
+  "instruct_curly_quotations": [
+    "formatting",
+    "special_characters",
+    "punctuation"
+  ],
+  "instruct_curly_quotations_and_missing_bracket": [
+    "formatting",
+    "punctuation",
+    "error_and_edge_cases",
+    "obstructions",
+    "special_characters"
+  ],
+  "instruct_curly_quotations_and_missing_bracket_and_typo": [
+    "formatting",
+    "punctuation",
+    "error_and_edge_cases",
+    "spelling_change",
+    "obstructions",
+    "special_characters"
+  ],
+  "instruct_curly_quotations_and_missing_bracket_and_typo_and_random_characters": [
+    "formatting",
+    "punctuation",
+    "error_and_edge_cases",
+    "spelling_change",
+    "obstructions",
+    "noise",
+    "special_characters"
+  ],
+  "instruct_curly_quotations_and_missing_bracket_and_typo_and_random_characters_and_extra_space": [
+    "formatting",
+    "punctuation",
+    "error_and_edge_cases",
+    "spelling_change",
+    "obstructions",
+    "noise",
+    "special_characters"
+  ],
+  "instruct_curly_quotations_and_typo": [
+    "formatting",
+    "punctuation",
+    "error_and_edge_cases",
+    "spelling_change",
+    "special_characters"
+  ],
+  "instruct_cynical": [
+    "tone",
+    "style",
+    "negative"
+  ],
+  "instruct_deadpan": [
+    "tone",
+    "style"
+  ],
+  "instruct_debate_turns": [
+    "dialogue_frames",
+    "format",
+    "structure"
+  ],
+  "instruct_deferential": [
+    "tone",
+    "register",
+    "formal"
+  ],
+  "instruct_direct_question": [
+    "speech-act",
+    "question_type"
+  ],
+  "instruct_dogmatic": [
+    "tone",
+    "voice"
+  ],
+  "instruct_double_negative": [
+    "syntax_tweaks",
+    "polarity"
+  ],
+  "instruct_dramatic": [
+    "tone",
+    "style",
+    "emotion"
+  ],
+  "instruct_dual_audience": [
+    "audience",
+    "structure"
+  ],
+  "instruct_dynamic_quiz": [
+    "format",
+    "genre",
+    "interactive"
+  ],
+  "instruct_edit_typo": [
+    "edits",
+    "spelling_change",
+    "error_and_edge_cases"
+  ],
+  "instruct_ellipsis_style": [
+    "punctuation",
+    "style"
+  ],
+  "instruct_em_dash_break": [
+    "punctuation",
+    "style"
+  ],
+  "instruct_email": [
+    "format",
+    "register",
+    "tone"
+  ],
+  "instruct_emergency_alert": [
+    "format",
+    "tone",
+    "speech-act"
+  ],
+  "instruct_emoji": [
+    "style",
+    "special_characters",
+    "informal",
+    "tone"
+  ],
+  "instruct_emoji_and_typo": [
+    "style",
+    "special_characters",
+    "informal",
+    "error_and_edge_cases",
+    "spelling_change"
+  ],
+  "instruct_emoji_and_typo_and_missing_bracket": [
+    "style",
+    "special_characters",
+    "informal",
+    "error_and_edge_cases",
+    "spelling_change",
+    "obstructions"
+  ],
+  "instruct_emoji_and_typo_and_random_question_marks": [
+    "style",
+    "special_characters",
+    "informal",
+    "noise",
+    "error_and_edge_cases"
+  ],
+  "instruct_emoji_only": [
+    "style",
+    "special_characters",
+    "formatting",
+    "informal"
+  ],
+  "instruct_emoticon": [
+    "style",
+    "special_characters",
+    "informal"
+  ],
+  "instruct_emoticon_and_typo": [
+    "style",
+    "special_characters",
+    "informal",
+    "error_and_edge_cases",
+    "spelling_change"
+  ],
+  "instruct_emoticon_and_typo_and_missing_bracket": [
+    "style",
+    "special_characters",
+    "informal",
+    "error_and_edge_cases",
+    "spelling_change",
+    "obstructions"
+  ],
+  "instruct_emoticon_and_typo_and_random_exclamations": [
+    "style",
+    "special_characters",
+    "informal",
+    "error_and_edge_cases",
+    "noise"
+  ],
+  "instruct_empty_input": [
+    "error_and_edge_cases"
+  ],
+  "instruct_enthusiastic": [
+    "tone",
+    "emotion",
+    "positive"
+  ],
+  "instruct_error_message": [
+    "format",
+    "tone",
+    "domain_jargon"
+  ],
+  "instruct_esperanto": [
+    "language"
+  ],
+  "instruct_euphemistic": [
+    "tone",
+    "style",
+    "obfuscation"
+  ],
+  "instruct_evidence_cited_md": [
+    "formatting",
+    "special_characters",
+    "structure"
+  ],
+  "instruct_exact_numbers": [
+    "formatting",
+    "emphasis"
+  ],
+  "instruct_exam_prompt": [
+    "format",
+    "genre"
+  ],
+  "instruct_exclamation": [
+    "punctuation",
+    "emphasis",
+    "style"
+  ],
+  "instruct_expert_consensus": [
+    "style",
+    "tone",
+    "register"
+  ],
+  "instruct_extra_punct": [
+    "punctuation",
+    "noise"
+  ],
+  "instruct_fact_check_inline": [
+    "format",
+    "style"
+  ],
+  "instruct_fashion_jargon": [
+    "domain_jargon"
+  ],
+  "instruct_few_words": [
+    "length",
+    "length_brevity",
+    "verbosity"
+  ],
+  "instruct_fewest_words": [
+    "length_brevity",
+    "verbosity"
+  ],
+  "instruct_finance_jargon": [
+    "domain_jargon",
+    "technical"
+  ]
+}

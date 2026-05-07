@@ -1,0 +1,308 @@
+[
+  {
+    "path": "data/alpaca/hpcdl/alpaca_10k_part1_phrxed.json",
+    "records": 8205,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/hpcdl/alpaca_10k_part1b_phrxed.json",
+    "records": 900,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/hpcdl/alpaca_10k_part1c_phrxed.json",
+    "records": 895,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/hpcdl/alpaca_10k_part4_phrxed.json",
+    "records": 6330,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/hpcdl/alpaca_10k_part4b_phrxed.json",
+    "records": 3670,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/phrxed_borg/alpaca_10k_part3b_phrxed.json",
+    "records": 3100,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/phrxed_borg/alpaca_10k_part5a_phrxed.json",
+    "records": 7100,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/phrxed_borg/alpaca_10k_part5b_phrxed.json",
+    "records": 580,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/phrxed_borg/alpaca_10k_part5c_phrxed.json",
+    "records": 580,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/phrxed_ese/alpaca_10k_part1b_phrxed.json",
+    "records": 249,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/phrxed_ese/alpaca_10k_part1c_phrxed.json",
+    "records": 247,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/phrxed_ese/alpaca_10k_part2a_phrxed.json",
+    "records": 6850,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/phrxed_ese/alpaca_10k_part2b_phrxed.json",
+    "records": 3150,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/phrxed_ese/alpaca_10k_part3a_phrxed.json",
+    "records": 6900,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/phrxed_ese/alpaca_10k_part5_phrxed.json",
+    "records": 2744,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/phrxed_ese/alpaca_10k_part5d_phrxed.json",
+    "records": 580,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/phrxed_ese/alpaca_10k_part5e_phrxed.json",
+    "records": 580,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  },
+  {
+    "path": "data/alpaca/phrxed_ese/alpaca_10k_part5f_phrxed.json",
+    "records": 580,
+    "style_keys_in_first_record": [
+      "instruct_coord_to_subord",
+      "instruct_double_negative",
+      "instruct_dramatic",
+      "instruct_formal_memo",
+      "instruct_future_tense",
+      "instruct_joke",
+      "instruct_leet_speak",
+      "instruct_one_typo_punctuation",
+      "instruct_output_markdown",
+      "instruct_polite_request",
+      "instruct_sardonic"
+    ]
+  }
+]
